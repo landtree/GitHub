@@ -14,7 +14,7 @@ float c1 = 1.009249522e-03, c2 = 2.378405444e-04, c3 = 2.019202697e-07;
 
 //creates timer value
 long previousMillis = 0;        // will store last time heater was updated
-long timer = 1000;           // interval at which to be on for
+long timer = 2000;           // interval at which to be on for
 
 void setup() {
 //turns on communication debugging
@@ -22,7 +22,6 @@ Serial.begin(9600);
 
 //sets the heater pin to be output
 pinMode(heater, OUTPUT);
-//starts the neopixels
 
 }
 
@@ -49,13 +48,14 @@ unsigned long currentMillis = millis();
   Serial.print("Temperature: "); 
   Serial.print(T);
   Serial.println(" F"); 
- 
-  if (T < 90 || T >= 99){
+
+  if (T <= 110)
+  {
     Serial.println("Heater is currently on");
     //turns the heater on
     digitalWrite(heater, on);
   }
-  else{
+  else if(T >= 112){
     Serial.println("Heater is currently off");
     digitalWrite(heater, off);
   }
